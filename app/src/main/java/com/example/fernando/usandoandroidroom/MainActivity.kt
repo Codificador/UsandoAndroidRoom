@@ -3,7 +3,7 @@ package com.example.fernando.usandoandroidroom
 import android.arch.persistence.room.Room
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,11 +15,13 @@ class MainActivity : AppCompatActivity() {
                     .allowMainThreadQueries()
                     .build()
         val dao = db.eventoDao()
-        dao.insert(Evento(2, "eu", "GOOGLE I/O"))
+        dao.insert(Evento(1, "me", "GOOGLE I/O"))
 
         val eventos = dao.listar()
+        var strLs : String = ""
         eventos.forEach {
-            Toast.makeText(this, it.nome, Toast.LENGTH_SHORT).show()
+             strLs += it.nome + "\n"
         }
+        textView.setText(strLs)
     }
 }
